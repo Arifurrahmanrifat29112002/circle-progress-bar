@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>circule proges bar</title>
+
+    <style>
+        body {
+            background: #ededf7;
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .progress_outer {
+            height: 210px;
+            width: 210px;
+            border-radius: 50%;
+            background: #fff;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 6px 6px 10px -1px rgba(0, 0, 0, 0.15),
+                -6px -6px 10px -1px rgba(255, 255, 255, 0.15);
+        }
+
+        .progress_inner {
+            height: 160px;
+            width: 160px;
+            border-radius: 50%;
+            background: #ededf7;
+            box-shadow: inset 4px 4px 6px -1px rgba(0, 0, 0, 0.2),
+                inset -4px -4px 6px -1px rgba(255, 255, 255, 0.7),
+                0.5px 0.5px 0px rgba(0, 0, 0, 0.15),
+                0.5px 12px 10px -10px rgba(0, 0, 0, 0.05);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .progress_inner span {
+            font-size: 20px;
+        }
+    </style>
+</head>
+
+<body>
+
+
+    <div class="progress_outer" data-start="5" data-finish="20">
+        <div class="progress_inner">
+            <span id="counter"></span>
+        </div>
+    </div>
+
+
+    <div class="progress_outer" data-start="20" data-finish="80">
+        <div class="progress_inner">
+            <span id="counter"></span>
+        </div>
+    </div>
+
+
+    <div class="progress_outer" data-start="10" data-finish="50">
+        <div class="progress_inner">
+            <span id="counter"></span>
+        </div>
+    </div>
+
+
+    <div class="progress_outer" data-start="5" data-finish="10">
+        <div class="progress_inner">
+            <span id="counter"></span>
+        </div>
+    </div>
+
+     
+
+    <script>
+        const progress_outer = () => {
+            let circles = document.getElementsByClassName('progress_outer');
+            const action = (el) => {
+                var start = setInterval(update, 100);
+                var upto = el.dataset.start;
+                function update() {
+                    var counter = el.children[0].children[0];
+                    var counts = upto++;
+
+                    if (upto > el.dataset.finish) {
+                        clearInterval(start);
+                    }
+                    counter.innerHTML = counts + "%";
+                    el.style.background = `conic-gradient(#4070f4 ${counts}%,#fff ${counts}%)`;
+
+                }
+
+            }
+            for (circle of circles) {
+                action(circle);
+            }
+        }
+        progress_outer();
+    </script>
+</body>
+
+</html>
